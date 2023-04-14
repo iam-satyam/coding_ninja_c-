@@ -1,0 +1,27 @@
+class Solution
+
+{
+    
+    
+    void del(stack<int>&s, int count,int n){
+        if(count==n/2){
+            s.pop();
+            return;
+        }
+        int num=s.top();
+        s.pop();
+        del(s,count+1,n);
+        s.push(num);
+        
+        
+        
+        
+    }
+    public:
+    
+    void deleteMid(stack<int>&s, int sizeOfStack)
+    { int count=0;
+      del(s,count,sizeOfStack);
+      
+    }
+};
