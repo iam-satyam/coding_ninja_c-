@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+void interLeaveQueue(queue < int > & q) {
+    queue<int> temp;
+    queue<int>ans;
+    int n=q.size()/2;
+    for(int i=1;i<=n;i++){
+int tempo=q.front();
+temp.push(tempo);
+q.pop();
+  }
+
+while(!q.empty()){
+int temp1=temp.front();
+int temp2=q.front();
+ans.push(temp1);
+ans.push(temp2);
+temp.pop();
+q.pop();
+}
+
+while(!ans.empty()){
+    int tempi=ans.front();
+q.push(tempi);
+ans.pop();
+
+}
+
+
+}
