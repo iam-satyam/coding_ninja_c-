@@ -1,0 +1,58 @@
+class Solution {
+    void boundleft(Node *root,vector<int> &ans){
+        if(root==NULL) return ;
+        if(root->left ==NULL && root->right==NULL) return ;
+        ans.push_back(root->data);
+        if(root->left){
+            boundleft(root->left,ans);
+        }
+        else{
+            boundleft(root->right,ans);
+            
+        }
+        
+    }
+        void boundleaf(Node *root,vector<int> &ans){
+            if(root==NULL) return;
+            if(root->left==NULL && root->right==NULL){
+            ans.push_back(root->data);
+            return;
+            }
+            boundleaf(root->left,ans);
+            boundleaf(root->right,ans);
+            
+            
+            
+        }
+        void boundright(Node *root,vector<int> &ans){
+        if(root==NULL) return ;
+        if(root->left ==NULL && root->right==NULL) return ;
+        
+        if(root->right){
+            boundright(root->right,ans);
+        }
+        else{
+            boundright(root->left,ans);
+            
+        }
+        ans.push_back(root->data);
+        
+    }
+    
+public:
+    vector <int> boundary(Node *root)
+    { vector<int> ans;
+    if (root == NULL) {
+        return ans;
+    }
+    ans.push_back(root->data);
+    boundleft(root->left, ans);
+
+    boundleaf(root->left, ans);
+    boundleaf(root->right, ans);
+
+    boundright(root->right, ans);
+    return ans;
+        
+    }
+};
