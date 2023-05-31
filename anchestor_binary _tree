@@ -1,0 +1,31 @@
+class Solution{
+    void solve(Node* root,int k,vector<int> &ans,vector<int> v){
+        
+        if(root==NULL) return;
+        
+         if(root->data==k){
+             for(auto i:v){
+                 ans.push_back(i);
+             }
+             return;
+         }
+         v.push_back(root->data);
+        
+         solve(root->left,k,ans,v);
+          solve(root->right,k,ans,v);
+          
+        
+       
+        
+    }
+  public:
+    // Function should return all the ancestor of the target node
+    vector<int> Ancestors(struct Node *root, int target)
+    { vector<int> v;
+        vector<int> ans;
+        solve(root,target,ans,v);
+        reverse(ans.begin(),ans.end());
+        return ans;
+         
+    }
+};
