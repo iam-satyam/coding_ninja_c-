@@ -1,0 +1,78 @@
+class Solution {
+    Node* mapping( Node* root,map<Node*,Node*> &m,int k){
+    Node* res=NULL;
+    queue<Node*> q;
+    q.push(root);
+    m[root]=NULL;
+    while(!q.empty()){
+        Node* temp=q.front();
+        q.pop();
+        if(temp->data==k){
+            res=temp;
+        }
+        if(temp->left){
+             m[temp->left]=temp;
+            q.push(temp->left);
+           
+        }
+        if(temp->right){
+             m[temp->right]=temp;
+            q.push(temp->right);
+           
+        }
+        
+    }
+    
+    
+    return res;
+    
+}
+int solve(Node* root, map<Node*,Node*> m){
+    map<Node*,bool> mo;
+    queue<Node*> qi;
+    qi.push(root);
+    mo[root]=true;
+    int ans=0;
+    
+    
+    while(!qi.empty()){
+        bool flag=false;
+        int n=qi.size();
+        for(int i=0;i<n;i++){
+             Node* front=qi.front();
+             qi.pop();
+             if(front->left && !mo[front->left]){
+                 flag=true;
+                 mo[front->left]=true;
+                 qi.push(front->left);
+             }
+             if(front->right && !mo[front->right]){
+                 flag=true;
+                 mo[front->right]=true;
+                 qi.push(front->right);
+             }
+             if(m[front] && !mo[m[front]]){
+                 flag=true;
+                 mo[m[front]]=true;
+                 qi.push(m[front]);
+             }
+            
+            
+        }
+        if(flag==true){
+            ans++;
+        }
+    }
+    return ans;
+    
+    
+}
+  public:
+    int minTime(Node* root, int target) 
+    {    
+        map<Node*,Node*> m;
+       Node* tar= mapping(root,m,target);
+       int ans= solve(tar,m);
+        return ans;
+    }
+};
