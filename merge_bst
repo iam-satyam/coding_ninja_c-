@@ -1,0 +1,36 @@
+TreeNode<int>* makey(vector<int> &preorder,int s,int e){
+    if(s>e) return NULL;
+    int mid=(s+e)/2;
+    TreeNode<int>* root=new TreeNode<int>(preorder[mid]);
+    root->left=makey(preorder,s,mid-1);
+    root->right=makey(preorder,mid+1,e);
+    return root;
+
+
+}
+void inorder(TreeNode<int> *root,vector<int> &v){
+    if(root==NULL) return;
+    inorder(root->left,v);
+    v.push_back(root->data);
+    inorder(root->right,v);
+
+}
+void ki(vector<int> &v3,vector<int> v2){
+    for(auto i:v2){
+        v3.push_back(i);
+
+    }
+
+}
+
+TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
+    if(root1==NULL||root2==NULL) return NULL;
+    vector<int> v1,v2,v3;
+    inorder(root1,v1);
+    inorder(root2,v2);
+    ki(v3,v2);
+    ki(v3,v1);
+    sort(v3.begin(),v3.end());
+    return makey(v3,0,v3.size()-1);
+
+}
