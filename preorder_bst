@@ -1,0 +1,15 @@
+BinaryTreeNode<int>* makey(vector<int> &preorder,int s,int e){
+    if(s>e) return NULL;
+    int mid=(s+e)/2;
+    BinaryTreeNode<int>* root=new BinaryTreeNode<int>(preorder[mid]);
+    root->left=makey(preorder,s,mid-1);
+    root->right=makey(preorder,mid+1,e);
+    return root;
+
+
+}
+
+BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
+    sort(preorder.begin(),preorder.end());
+   return makey(preorder,0,preorder.size()-1);
+}
